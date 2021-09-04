@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.text-tomato {
+  color: #e05d5d;
+}
+
+.text-warning {
+  color: #ffb344;
+}
+
+.text-dark-blue {
+  color: #297f87;
+}
+
+body {
+  width: 22rem;
+}
+
+.title {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title h4 {
+  color: #4c4c6d;
+}
+
+.title .btn-new,
+.title .btn-cancel,
+.clear-meeting {
+  color: white;
+  border: none;
+  padding: 0.2rem 0.4rem;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.clear-meeting {
+  background: rgb(182, 124, 124);
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.clear-meeting:hover {
+  background: rgb(230, 94, 94);
+}
+
+.title .btn-new {
+  background: #66de93;
+}
+
+.title .btn-new:hover {
+  background: #27eb72;
+}
+
+.title .btn-cancel {
+  background: #ffb344;
+}
+
+.title .btn-cancel:hover {
+  background: #ffc36a;
+}
+
+.list-class {
+  margin: 1rem 1.5rem;
+}
+
+.list-class > li {
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.list-class .class-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-class .class-title .event {
+  width: 90%;
+}
+
+.list-class .class-title div {
+  margin-right: -0.8rem;
+}
+
+.list-class .class-title div i {
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.list-class .class-title div i:first-child {
+  margin-right: 0.1rem;
+}
+
+.list-link {
+  margin: 0 1rem 0.5rem 1rem;
+}
+
+.list-link > li {
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+
+.modal-add {
+  margin: 0.5rem 1rem;
+}
+
+.input-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.group-input {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.group-input div {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-input div input {
+  width: 80%;
+}
+
+.input-control label,
+.group-input div label {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+  color: #424242;
+}
+
+.input-control input,
+.group-input div input {
+  box-sizing: border-box;
+  height: 1.5rem;
+  padding-left: 0.3rem;
+  border: 1.5px solid #444444;
+}
+
+.input-control input:focus,
+.group-input div input:focus {
+  outline: none;
+  border: 1.8px solid #74b8be;
+  border-radius: 2px;
+}
+
+.btn-submit {
+  background: #66de93;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-submit:hover {
+  background: #1cc75e;
+}
+
+.noMeet {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

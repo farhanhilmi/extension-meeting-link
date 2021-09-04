@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meeting Links</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="title">
+      <h4 id="titleMain">Meeting Link</h4>
+      <h4 class="hidden" id="titleAdd">Add new meeting</h4>
+      <h4 class="hidden" id="titleUpdate">Update meeting</h4>
+      <button id="btn-new" class="btn-new">
+        <i class="fas fa-plus fa-sm"></i> New meeting
+      </button>
+      <button id="btn-cancel" class="btn-cancel hidden">Cancel</button>
+    </div>
+    <hr />
+    <div id="meetingList">
+      <button id="clear" class="clear-meeting">Clear all meeting</button>
+      <h4 class="noMeet" id="noMeet">No meeting links yet.</h4>
+
+      <ol class="list-class" id="list-class"></ol>
+    </div>
+
+    <div id="modal-add" class="hidden modal-add">
+      <form method="post">
+        <div class="input-control">
+          <label for="Event">Meeting Name</label>
+          <input
+            id="eventName"
+            type="text"
+            placeholder="meeting name here..."
+            required
+          />
+        </div>
+        <div class="input-control">
+          <label for="Event">Meeting Link</label>
+          <input
+            id="link"
+            type="text"
+            placeholder="meeting link here..."
+            required
+          />
+        </div>
+        <div class="input-control">
+          <label for="Event">Day / Date</label>
+          <input
+            id="date"
+            type="text"
+            placeholder="meeting day / date here..."
+            required
+          />
+        </div>
+        <div class="group-input">
+          <div>
+            <label for="Event">Start Time</label>
+            <input
+              id="start_time"
+              type="text"
+              placeholder="start time here..."
+              required
+            />
+          </div>
+          <div>
+            <label for="Event">End Time</label>
+            <input
+              id="end_time"
+              type="text"
+              placeholder="end time here..."
+              required
+            />
+          </div>
+        </div>
+
+        <button id="btn-submit" type="submit" class="btn-submit">Submit</button>
+      </form>
+    </div>
+
+    <div id="modal-update" class="hidden modal-add">
+      <form method="post">
+        <div class="input-control">
+          <label for="Event">Meeting Name</label>
+          <input
+            id="updateEvent"
+            type="text"
+            placeholder="meeting name here..."
+            required
+          />
+        </div>
+        <div class="input-control">
+          <label for="Event">Meeting Link</label>
+          <input
+            id="updateLink"
+            type="text"
+            placeholder="meeting link here..."
+            required
+          />
+        </div>
+        <div class="input-control">
+          <label for="Event">Day / Date</label>
+          <input
+            id="updateDate"
+            type="text"
+            placeholder="meeting day / date here..."
+            required
+          />
+        </div>
+        <div class="group-input">
+          <div>
+            <label for="Event">Start Time</label>
+            <input
+              id="updateStart"
+              type="text"
+              placeholder="start time here..."
+              required
+            />
+          </div>
+          <div>
+            <label for="Event">End Time</label>
+            <input
+              id="updateEnd"
+              type="text"
+              placeholder="end time here..."
+              required
+            />
+          </div>
+        </div>
+
+        <button id="btn-updateData" type="submit" class="btn-submit">
+          Update
+        </button>
+      </form>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
