@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +22,10 @@
 }
 
 body {
-  width: 22rem;
+  min-width: 25rem;
+  max-width: 30rem;
+  /* font-family: Arial, Helvetica, sans-serif !important; */
+  font-family: "Nunito", sans-serif;
 }
 
 .title {
@@ -72,12 +77,17 @@ body {
 }
 
 .list-class {
-  margin: 1rem 1.5rem;
+  /* margin: 1rem 1.5rem; */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  font-size: 14px;
 }
 
 .list-class > li {
   margin-bottom: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .list-class .class-title {
