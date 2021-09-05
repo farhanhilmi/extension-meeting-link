@@ -132,7 +132,7 @@ function reloadList() {
       cdData += "<li>";
 
       cdData += "<div class='class-title'>";
-      cdData += "<span class='event'>" + item.event + " | ";
+      cdData += "<span class='event'>" + item.event + "<br>";
       cdData +=
         "<span class='day text-dark-blue'>" + item.date + "</span>" + " | ";
       cdData += "<span class='time text-tomato'>";

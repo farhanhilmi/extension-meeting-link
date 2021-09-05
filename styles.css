@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -21,6 +23,7 @@
 
 body {
   width: 22rem;
+  font-family: "Nunito", sans-serif;
 }
 
 .title {
@@ -77,7 +80,8 @@ body {
 
 .list-class > li {
   margin-bottom: 0.8rem;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .list-class .class-title {
