@@ -37,6 +37,47 @@ body {
   color: #4c4c6d;
 }
 
+.btn-setting {
+  color: #4c4c6d;
+  border: none;
+  padding: 0.2rem 0.4rem;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  background: none;
+}
+
+.modal-setting {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.modal-setting h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.modal-setting .settings {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.modal-setting .settings .languageBtn {
+  color: white;
+  border: none;
+  padding: 0.5rem 0;
+  width: 6rem;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  background: #3cdb99;
+}
+
+.modal-setting .settings .languageBtn:hover {
+  background: #1effa1;
+}
+
 .title .btn-new,
 .title .btn-cancel,
 .clear-meeting {
@@ -56,6 +97,19 @@ body {
 
 .clear-meeting:hover {
   background: rgb(230, 94, 94);
+}
+
+.repeatedSpan {
+  color: #6ea8ad;
+}
+
+.linkText {
+  color: rgb(15, 110, 199);
+  font-weight: 600;
+}
+
+.linkText:hover {
+  color: rgb(6, 64, 117);
 }
 
 .title .btn-new {
@@ -150,7 +204,11 @@ body {
 }
 
 .group-input div input {
-  width: 80%;
+  width: 50%;
+  text-align: center;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  cursor: pointer;
 }
 
 .input-control label,

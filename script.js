@@ -1,42 +1,112 @@
-// const meetingLinks = [
-//   {
-//     id: new Date().toISOString(),
-//     event: "Manjarkom",
-//     link: [
-//       "https://meet.google.com/fib-ibmu-jys",
-//       "https://meet.google.com/fib-ibmu-abs",
-//     ],
-//     date: "Kamis",
-//     start_time: "15:00",
-//     end_time: "18:00",
-//   },
-// ];
-const languageAvailable = ["Indonesia", "English"];
-const language = "Indonesia";
+const LangStorage = "meetLinkLang";
+const MeetStorage = "meetingLinks";
+let selectedLang = localStorage.getItem(LangStorage);
 
-const dateRegion = language == "English" ? "en-US" : "id";
-const repetead = language == "English" ? "Repeated" : "Setiap";
+const setLanguage = (lang) => {
+  localStorage.setItem(LangStorage, lang);
+  selectedLang = lang;
+};
+
+const languageAvailable = ["Indonesia", "English"];
+const language = selectedLang ? selectedLang : "English";
+
+const whichLanguage = (english, bahasa) => {
+  return language == "English" ? english : bahasa;
+};
+
+const displayLanguage = {
+  // Button
+  clearBtn: whichLanguage("Clear all meeting", "Hapus semua rapat"),
+  addLinkBtn: whichLanguage("New meeting", "Rapat baru"),
+  cancelBtn: whichLanguage("Cancel", "Batal"),
+  submitBtn: whichLanguage("Submit", "Submit"),
+  updateBtn: whichLanguage("Update", "Perbarui"),
+
+  // Title
+  addTitle: whichLanguage("Add new meeting", "Tambah Rapat baru"),
+  updateTitle: whichLanguage("Update meeting", "Perbarui Rapat"),
+
+  // Input field
+  meetingName: whichLanguage("Meeting Name", "Nama Rapat"),
+  meetingLink: whichLanguage("Meeting Link", "Link Rapat"),
+  dayDate: whichLanguage("Date", "Tanggal"),
+  isRepeat: whichLanguage("Repeat every week", "Ulangi setiap minggu"),
+  startTime: whichLanguage("Start Time", "Waktu Mulai"),
+  endTime: whichLanguage("End Time", "Waktu Berakhir"),
+
+  // Placeholder input
+  meetingPlaceholder: whichLanguage("Meeting name here", "Masukan nama rapat"),
+  linkPlaceholder: whichLanguage("Meeting link here", "Masukan link rapat"),
+  startPlaceholder: whichLanguage("16:00", "16:00"),
+  endPlaceholder: whichLanguage("17:00", "17:00"),
+
+  repetead: whichLanguage("Repeated", "Setiap"),
+
+  // Date format
+  dateRegion: whichLanguage("en-US", "id"),
+};
 
 const titleMain = document.getElementById("titleMain");
 const titleAdd = document.getElementById("titleAdd");
 const titleUpdate = document.getElementById("titleUpdate");
+const titleAddBtn = document.getElementById("titleAddBtn");
 
 const btnNew = document.getElementById("btn-new");
 const btnCancel = document.getElementById("btn-cancel");
 const btnClear = document.getElementById("clear");
+const btnSetting = document.getElementById("btn-setting");
 
 let btnUpdate;
 
 const meetingList = document.getElementById("meetingList");
 const modalAdd = document.getElementById("modal-add");
 const modalUpdate = document.getElementById("modal-update");
+const modalSetting = document.getElementById("modal-setting");
+const mainPage = document.getElementById("main-page");
 
 let allData = [];
+
+const labelMeeting = document.getElementsByClassName("labelMeeting");
+const labelLink = document.getElementsByClassName("labelLink");
+const labelDate = document.getElementsByClassName("labelDate");
+const labelCheck = document.getElementsByClassName("labelCheck");
+const labelStart = document.getElementsByClassName("labelStart");
+const labelEnd = document.getElementsByClassName("labelEnd");
+
+const meetingPlaceholder = document.getElementsByClassName("eventName");
+const linkPlaceholder = document.getElementsByClassName("link");
+const StartPlaceholder = document.getElementsByClassName("start_time");
+const endPlaceholder = document.getElementsByClassName("end_time");
+
+const changeLanguageDisplay = () => {
+  titleAdd.textContent = displayLanguage.addTitle;
+  titleUpdate.textContent = displayLanguage.updateTitle;
+  titleAddBtn.textContent = displayLanguage.addLinkBtn;
+  btnClear.textContent = displayLanguage.clearBtn;
+  btnCancel.textContent = displayLanguage.cancelBtn;
+
+  // Label input
+  for (let i = 0; i < labelMeeting.length; i++) {
+    labelMeeting[i].textContent = displayLanguage.meetingName;
+    labelLink[i].textContent = displayLanguage.meetingLink;
+    labelDate[i].textContent = displayLanguage.dayDate;
+    labelCheck[i].textContent = displayLanguage.isRepeat;
+    labelStart[i].textContent = displayLanguage.startTime;
+    labelEnd[i].textContent = displayLanguage.endTime;
+  }
+
+  for (let i = 0; i < meetingPlaceholder.length; i++) {
+    meetingPlaceholder[i].placeholder = displayLanguage.meetingPlaceholder;
+    linkPlaceholder[i].placeholder = displayLanguage.linkPlaceholder;
+    StartPlaceholder[i].placeholder = displayLanguage.startPlaceholder;
+    endPlaceholder[i].placeholder = displayLanguage.endPlaceholder;
+  }
+};
 
 const isEmpty = (str) => !str.trim().length;
 
 function getAllData() {
-  allData = JSON.parse(localStorage.getItem("meetingLinks"));
+  allData = JSON.parse(localStorage.getItem(MeetStorage));
 }
 
 function changeInputType(oldObject, oType, oValue) {
@@ -73,6 +143,11 @@ const getUpdate = function () {
     modalUpdate.classList.remove("hidden");
   } else {
     modalUpdate.classList.add("hidden");
+  }
+
+  if (!modalSetting.classList.contains("hidden")) {
+    // modalSetting.classList.remove("hidden");
+    modalSetting.classList.add("hidden");
   }
 
   if (btnCancel.classList.contains("hidden")) {
@@ -135,13 +210,11 @@ const getUpdate = function () {
       month: "long",
       year: "numeric",
     };
-    // if (repeat.checked == true) {
-    //   optionsDate = { weekday: "long" };
-    // }
 
-    const pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
-      newDate
-    );
+    const pickDate = new Intl.DateTimeFormat(
+      displayLanguage.dateRegion,
+      optionsDate
+    ).format(newDate);
 
     allData[objIndex].link = updateLink.value;
     allData[objIndex].event = updateEvent.value;
@@ -149,7 +222,7 @@ const getUpdate = function () {
     allData[objIndex].end_time = updateEnd.value;
     allData[objIndex].date = pickDate;
     allData[objIndex].repeat = repeat.checked;
-    localStorage.setItem("meetingLinks", JSON.stringify(allData));
+    localStorage.setItem(MeetStorage, JSON.stringify(allData));
   });
 };
 
@@ -158,13 +231,13 @@ function getDelete() {
 
   const newData = allData.filter((item) => item.id !== id);
   allData = newData;
-  localStorage.setItem("meetingLinks", JSON.stringify(allData));
+  localStorage.setItem(MeetStorage, JSON.stringify(allData));
   reloadList();
 }
 
 function reloadList() {
   getAllData();
-
+  changeLanguageDisplay();
   const listClass = document.getElementById("list-class");
   const noMeet = document.getElementById("noMeet");
   if (allData == null || allData.length < 1) {
@@ -195,10 +268,13 @@ function reloadList() {
         optionsDate = { weekday: "long" };
       }
 
-      let pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
-        newDate
-      );
-      pickDate = item.repeat ? `{${repetead}} ${pickDate}` : pickDate;
+      let pickDate = new Intl.DateTimeFormat(
+        displayLanguage.dateRegion,
+        optionsDate
+      ).format(newDate);
+      pickDate = item.repeat
+        ? `<span class="repeatedSpan">{${displayLanguage.repetead}}</span> ${pickDate}`
+        : pickDate;
 
       cdData += "<li>";
 
@@ -246,7 +322,8 @@ function reloadList() {
       cdData += "<ul class='list-link'>";
 
       cdData += "<li>";
-      cdData += "<a target='_blank' href=" + `${item.link}` + ">";
+      cdData +=
+        "<a class='linkText' target='_blank' href=" + `${item.link}` + ">";
       cdData += `${item.link}`;
       cdData += "</a>";
       cdData += "</li>";
@@ -262,6 +339,8 @@ function reloadList() {
   listClass.innerHTML = childElement;
   btnUpdate = document.querySelectorAll(".btn-update");
   btnDelete = document.querySelectorAll(".btn-delete");
+  btnDelete = document.querySelectorAll(".languageBtn");
+
   btnUpdate.forEach((el) => el.addEventListener("click", getUpdate));
   btnDelete.forEach((el) => el.addEventListener("click", getDelete));
 }
@@ -269,7 +348,7 @@ function reloadList() {
 window.onload = reloadList();
 
 function clearData() {
-  localStorage.removeItem("meetingLinks");
+  localStorage.removeItem(MeetStorage);
   reloadList();
 }
 
@@ -310,13 +389,13 @@ btnNew.addEventListener("click", function () {
     let isRepeat = false;
 
     if (repeat.checked == true) {
-      // optionsDate = { weekday: "long" };
       isRepeat = true;
     }
 
-    const pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
-      newDate
-    );
+    const pickDate = new Intl.DateTimeFormat(
+      displayLanguage.dateRegion,
+      optionsDate
+    ).format(newDate);
 
     const newData = {
       id: new Date().toISOString(),
@@ -334,7 +413,7 @@ btnNew.addEventListener("click", function () {
     } else {
       allData.push(newData);
     }
-    localStorage.setItem("meetingLinks", JSON.stringify(allData));
+    localStorage.setItem(MeetStorage, JSON.stringify(allData));
   });
 
   titleMain.classList.add("hidden");
@@ -389,4 +468,26 @@ btnCancel.addEventListener("click", function () {
   } else {
     btnNew.classList.add("hidden");
   }
+});
+
+btnSetting.addEventListener("click", function () {
+  modalSetting.classList.remove("hidden");
+  mainPage.classList.add("hidden");
+
+  const btnIndo = document.getElementById("indonesia");
+  const btnEnglish = document.getElementById("english");
+
+  btnIndo.addEventListener("click", function () {
+    setLanguage("Indonesia");
+    modalSetting.classList.add("hidden");
+    mainPage.classList.remove("hidden");
+    alert("Buka kembali pada logo ekstensi untuk melihat perubahan bahasa");
+  });
+
+  btnEnglish.addEventListener("click", function () {
+    setLanguage("English");
+    modalSetting.classList.add("hidden");
+    mainPage.classList.remove("hidden");
+    alert("Reopen the extension logo to refresh the displayed language");
+  });
 });

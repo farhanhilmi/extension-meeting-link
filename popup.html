@@ -11,7 +11,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- <script src="https://cdn.jsdelivr.net/npm/timepicker.js@3.1.0/dist/timepicker.min.js"></script> -->
     <link
       href="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css"
       rel="stylesheet"
@@ -20,137 +19,170 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="title">
-      <h4 id="titleMain">Meeting Link</h4>
-      <h4 class="hidden" id="titleAdd">Add new meeting</h4>
-      <h4 class="hidden" id="titleUpdate">Update meeting</h4>
-      <button id="btn-new" class="btn-new">
-        <i class="fas fa-plus fa-sm"></i> New meeting
-      </button>
-      <button id="btn-cancel" class="btn-cancel hidden">Cancel</button>
-    </div>
-    <hr />
-    <div id="meetingList">
-      <button id="clear" class="clear-meeting">Clear all meeting</button>
-      <h4 class="noMeet" id="noMeet">No meeting links yet.</h4>
+    <main id="main-page">
+      <div class="title">
+        <h4 id="titleMain">Meeting Link</h4>
+        <h4 class="hidden" id="titleAdd"></h4>
+        <h4 class="hidden" id="titleUpdate"></h4>
+        <div>
+          <button id="btn-new" class="btn-new">
+            <i class="fas fa-plus fa-sm"></i> <span id="titleAddBtn"></span>
+          </button>
+          <button id="btn-setting" class="btn-setting">
+            <i class="fas fa-cog fa-lg"></i>
+          </button>
+          <button id="btn-cancel" class="btn-cancel hidden">Cancel</button>
+        </div>
+      </div>
+      <hr />
+      <div id="meetingList">
+        <button id="clear" class="clear-meeting"></button>
+        <h4 class="noMeet" id="noMeet">No meeting links yet.</h4>
 
-      <ol class="list-class" id="list-class"></ol>
-    </div>
+        <ol class="list-class" id="list-class"></ol>
+      </div>
 
-    <div id="modal-add" class="hidden modal-add">
-      <form method="post">
-        <div class="input-control">
-          <label for="Event">Meeting Name</label>
-          <input
-            id="eventName"
-            type="text"
-            placeholder="meeting name here..."
-            required
-          />
-        </div>
-        <div class="input-control">
-          <label for="Event">Meeting Link</label>
-          <input
-            id="link"
-            type="text"
-            placeholder="meeting link here..."
-            required
-          />
-        </div>
-        <div class="input-control">
-          <label for="Event">Day / Date</label>
-          <input id="date" type="date" placeholder="dd-mm-yyyy" required />
-        </div>
-        <div class="input-control-repeat">
-          <input id="repeat" type="checkbox" />
-          <label for="Event">Repeat every week</label>
-        </div>
-        <div class="group-input">
-          <div>
-            <label for="Event">Start Time</label>
+      <div id="modal-add" class="hidden modal-add">
+        <form method="post">
+          <div class="input-control">
+            <label for="Event" class="labelMeeting">Meeting Name</label>
             <input
-              id="start_time"
+              class="eventName"
+              id="eventName"
               type="text"
-              placeholder="start time here..."
-              required
-              autocomplete="off"
-            />
-          </div>
-          <div>
-            <label for="Event">End Time</label>
-            <input
-              id="end_time"
-              type="text"
-              placeholder="end time here..."
-              autocomplete="off"
+              placeholder="meeting name here..."
               required
             />
           </div>
-        </div>
-
-        <button id="btn-submit" type="submit" class="btn-submit">Submit</button>
-      </form>
-    </div>
-
-    <div id="modal-update" class="hidden modal-add">
-      <form method="post">
-        <div class="input-control">
-          <label for="Event">Meeting Name</label>
-          <input
-            id="updateEvent"
-            type="text"
-            placeholder="meeting name here..."
-            required
-          />
-        </div>
-        <div class="input-control">
-          <label for="Event">Meeting Link</label>
-          <input
-            id="updateLink"
-            type="text"
-            placeholder="meeting link here..."
-            required
-          />
-        </div>
-        <div class="input-control">
-          <label for="Event">Day / Date</label>
-          <input
-            id="updateDate"
-            type="date"
-            placeholder="meeting day / date here..."
-            required
-          />
-        </div>
-        <div class="input-control-repeat">
-          <input id="repeatUpdate" type="checkbox" />
-          <label for="Event">Repeat every week</label>
-        </div>
-        <div class="group-input">
-          <div>
-            <label for="Event">Start Time</label>
+          <div class="input-control">
+            <label class="labelLink" for="Event">Meeting Link</label>
             <input
-              id="updateStart"
+              class="link"
+              id="link"
               type="text"
-              placeholder="start time here..."
+              placeholder="meeting link here..."
               required
             />
           </div>
-          <div>
-            <label for="Event">End Time</label>
+          <div class="input-control">
+            <label class="labelDate" for="Event">Date</label>
             <input
-              id="updateEnd"
-              type="text"
-              placeholder="end time here..."
+              id="date"
+              class="date"
+              type="date"
+              placeholder="dd-mm-yyyy"
               required
             />
           </div>
-        </div>
+          <div class="input-control-repeat">
+            <input id="repeat" type="checkbox" class="repeat" />
+            <label class="labelCheck" for="Event">Repeat every week</label>
+          </div>
+          <div class="group-input">
+            <div>
+              <label class="labelStart" for="Event">Start Time</label>
+              <input
+                class="start_time"
+                id="start_time"
+                type="text"
+                placeholder="start time here..."
+                required
+                autocomplete="off"
+              />
+            </div>
+            <div>
+              <label class="labelEnd" for="Event">End Time</label>
+              <input
+                class="end_time"
+                id="end_time"
+                type="text"
+                placeholder="end time here..."
+                autocomplete="off"
+                required
+              />
+            </div>
+          </div>
 
-        <button id="btn-updateData" type="submit" class="btn-submit">
-          Update
-        </button>
-      </form>
+          <button id="btn-submit" type="submit" class="btn-submit">
+            Submit
+          </button>
+        </form>
+      </div>
+
+      <div id="modal-update" class="hidden modal-add">
+        <form method="post">
+          <div class="input-control">
+            <label class="labelMeeting" for="Event">Meeting Name</label>
+            <input
+              class="eventName"
+              id="updateEvent"
+              type="text"
+              placeholder="meeting name here..."
+              required
+            />
+          </div>
+          <div class="input-control">
+            <label class="labelLink" for="Event">Meeting Link</label>
+            <input
+              class="link"
+              id="updateLink"
+              type="text"
+              placeholder="meeting link here..."
+              required
+            />
+          </div>
+          <div class="input-control">
+            <label class="labelDate" for="Event">Date</label>
+            <input
+              class="date"
+              id="updateDate"
+              type="date"
+              placeholder="meeting day / date here..."
+              required
+            />
+          </div>
+          <div class="input-control-repeat">
+            <input id="repeatUpdate" class="repeat" type="checkbox" />
+            <label class="labelCheck" for="Event">Repeat every week</label>
+          </div>
+          <div class="group-input">
+            <div>
+              <label class="labelStart" for="Event">Start Time</label>
+              <input
+                class="start_time"
+                id="updateStart"
+                type="text"
+                placeholder="start time here..."
+                required
+              />
+            </div>
+            <div>
+              <label class="labelEnd" for="Event">End Time</label>
+              <input
+                class="end_time"
+                id="updateEnd"
+                type="text"
+                placeholder="end time here..."
+                required
+              />
+            </div>
+          </div>
+
+          <button id="btn-updateData" type="submit" class="btn-submit">
+            Update
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <div id="modal-setting" class="modal-setting hidden">
+      <h3>Choose language</h3>
+      <div class="settings">
+        <button id="english" class="languageBtn">English</button>
+        <button id="indonesia" class="languageBtn">Indonesia</button>
+      </div>
     </div>
+
     <script>
       const timepicker = new TimePicker(
         ["start_time", "end_time", "updateStart", "updateEnd"],
