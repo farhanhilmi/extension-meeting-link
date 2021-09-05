@@ -125,6 +125,19 @@ body {
   margin-bottom: 1rem;
 }
 
+.input-control-repeat {
+  display: flex;
+  margin-top: -0.65rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.input-control-repeat label {
+  font-weight: 600;
+  color: #424242;
+  margin-left: 0.5rem;
+}
+
 .group-input {
   display: flex;
   margin-bottom: 1rem;

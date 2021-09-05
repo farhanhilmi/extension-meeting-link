@@ -11,6 +11,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/timepicker.js@3.1.0/dist/timepicker.min.js"></script> -->
+    <link
+      href="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css"
+      rel="stylesheet"
+    />
+    <script src="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -53,12 +59,11 @@
         </div>
         <div class="input-control">
           <label for="Event">Day / Date</label>
-          <input
-            id="date"
-            type="text"
-            placeholder="meeting day / date here..."
-            required
-          />
+          <input id="date" type="date" placeholder="dd-mm-yyyy" required />
+        </div>
+        <div class="input-control-repeat">
+          <input id="repeat" type="checkbox" />
+          <label for="Event">Repeat every week</label>
         </div>
         <div class="group-input">
           <div>
@@ -68,6 +73,7 @@
               type="text"
               placeholder="start time here..."
               required
+              autocomplete="off"
             />
           </div>
           <div>
@@ -76,6 +82,7 @@
               id="end_time"
               type="text"
               placeholder="end time here..."
+              autocomplete="off"
               required
             />
           </div>
@@ -109,10 +116,14 @@
           <label for="Event">Day / Date</label>
           <input
             id="updateDate"
-            type="text"
+            type="date"
             placeholder="meeting day / date here..."
             required
           />
+        </div>
+        <div class="input-control-repeat">
+          <input id="repeatUpdate" type="checkbox" />
+          <label for="Event">Repeat every week</label>
         </div>
         <div class="group-input">
           <div>
@@ -140,6 +151,19 @@
         </button>
       </form>
     </div>
+    <script>
+      const timepicker = new TimePicker(
+        ["start_time", "end_time", "updateStart", "updateEnd"],
+        {
+          lang: "en",
+          theme: "dark",
+        }
+      );
+      timepicker.on("change", function (evt) {
+        var value = (evt.hour || "00") + ":" + (evt.minute || "00");
+        evt.element.value = value;
+      });
+    </script>
 
     <script src="./script.js"></script>
   </body>

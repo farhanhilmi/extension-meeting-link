@@ -11,6 +11,11 @@
 //     end_time: "18:00",
 //   },
 // ];
+const languageAvailable = ["Indonesia", "English"];
+const language = "Indonesia";
+
+const dateRegion = language == "English" ? "en-US" : "id";
+const repetead = language == "English" ? "Repeated" : "Setiap";
 
 const titleMain = document.getElementById("titleMain");
 const titleAdd = document.getElementById("titleAdd");
@@ -32,6 +37,17 @@ const isEmpty = (str) => !str.trim().length;
 
 function getAllData() {
   allData = JSON.parse(localStorage.getItem("meetingLinks"));
+}
+
+function changeInputType(oldObject, oType, oValue) {
+  var newObject = document.createElement("input");
+  newObject.type = oType;
+  newObject.value = oValue;
+  if (oldObject.name) newObject.name = oldObject.name;
+  if (oldObject.id) newObject.id = oldObject.id;
+  if (oldObject.className) newObject.className = oldObject.className;
+  oldObject.parentNode.replaceChild(newObject, oldObject);
+  return newObject;
 }
 
 const getUpdate = function () {
@@ -83,14 +99,20 @@ const getUpdate = function () {
   const updateStart = document.getElementById("updateStart");
   const updateEnd = document.getElementById("updateEnd");
   const updateDate = document.getElementById("updateDate");
+  const repeat = document.getElementById("repeatUpdate");
 
   updateEvent.value = eventName;
   updateLink.value = link;
   updateStart.value = start_time;
   updateEnd.value = end_time;
-  updateDate.value = date;
 
   const objIndex = allData.findIndex((obj) => obj.id == id);
+
+  repeat.checked = allData[objIndex].repeat;
+  const newDate = new Date(allData[objIndex].date);
+  const day = ("0" + newDate.getDate()).slice(-2);
+  const month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+  updateDate.value = `${newDate.getFullYear()}-${month}-${day}`;
 
   const btnUpdateData = document.getElementById("btn-updateData");
   btnUpdateData.addEventListener("click", function () {
@@ -105,11 +127,28 @@ const getUpdate = function () {
       return;
     }
 
+    const newDate = new Date(updateDate.value);
+
+    const optionsDate = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    // if (repeat.checked == true) {
+    //   optionsDate = { weekday: "long" };
+    // }
+
+    const pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
+      newDate
+    );
+
     allData[objIndex].link = updateLink.value;
     allData[objIndex].event = updateEvent.value;
     allData[objIndex].start_time = updateStart.value;
     allData[objIndex].end_time = updateEnd.value;
-    allData[objIndex].date = updateDate.value;
+    allData[objIndex].date = pickDate;
+    allData[objIndex].repeat = repeat.checked;
     localStorage.setItem("meetingLinks", JSON.stringify(allData));
   });
 };
@@ -142,12 +181,31 @@ function reloadList() {
     .map((item) => {
       let cdData = "";
       const nameEvent = item.event.split(" ");
+
+      const newDate = new Date(item.date);
+
+      let optionsDate = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      };
+
+      if (item.repeat == true) {
+        optionsDate = { weekday: "long" };
+      }
+
+      let pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
+        newDate
+      );
+      pickDate = item.repeat ? `{${repetead}} ${pickDate}` : pickDate;
+
       cdData += "<li>";
 
       cdData += "<div class='class-title'>";
       cdData += "<span class='event'>" + item.event + "<br>";
       cdData +=
-        "<span class='day text-dark-blue'>" + item.date + "</span>" + " | ";
+        "<span class='day text-dark-blue'>" + pickDate + "</span>" + " | ";
       cdData += "<span class='time text-tomato'>";
       cdData +=
         "<span>" +
@@ -228,6 +286,7 @@ btnNew.addEventListener("click", function () {
     const date = document.getElementById("date").value;
     const start_time = document.getElementById("start_time").value;
     const end_time = document.getElementById("end_time").value;
+    const repeat = document.getElementById("repeat");
 
     if (
       isEmpty(eventName) ||
@@ -239,14 +298,35 @@ btnNew.addEventListener("click", function () {
       alert("Please fill all required field");
       return;
     }
+    const newDate = new Date(date);
+
+    let optionsDate = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+
+    let isRepeat = false;
+
+    if (repeat.checked == true) {
+      // optionsDate = { weekday: "long" };
+      isRepeat = true;
+    }
+
+    const pickDate = new Intl.DateTimeFormat(dateRegion, optionsDate).format(
+      newDate
+    );
 
     const newData = {
       id: new Date().toISOString(),
       event: eventName,
       link: link,
-      date: date,
+      // date: `${formatDate[2]} ${formatDate[1]} ${formatDate[3]}`,
+      date: pickDate,
       start_time: start_time,
       end_time: end_time,
+      repeat: isRepeat,
     };
 
     if (allData == null) {

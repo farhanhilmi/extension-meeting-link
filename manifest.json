@@ -4,6 +4,9 @@
   "version": "1.0",
   "description": "Extension to save your link meeting links so they can be easily managed and accessed in your browser!",
   "permissions": ["activeTab", "storage"],
+
+  "content_security_policy": "script-src 'self'; script-src-elem 'self' 'unsafe-inline' http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js; object-src 'self'",
+
   "browser_action": {
     "default_popup": "popup.html",
     "default_title": "Meeting Links",
