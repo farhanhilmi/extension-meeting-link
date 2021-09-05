@@ -22,9 +22,7 @@
 }
 
 body {
-  min-width: 25rem;
-  max-width: 30rem;
-  /* font-family: Arial, Helvetica, sans-serif !important; */
+  width: 22rem;
   font-family: "Nunito", sans-serif;
 }
 
@@ -77,17 +75,13 @@ body {
 }
 
 .list-class {
-  /* margin: 1rem 1.5rem; */
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
-  font-size: 14px;
+  margin: 1rem 1.5rem;
 }
 
 .list-class > li {
   margin-bottom: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .list-class .class-title {
