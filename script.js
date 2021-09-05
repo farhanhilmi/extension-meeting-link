@@ -28,6 +28,8 @@ const modalUpdate = document.getElementById("modal-update");
 
 let allData = [];
 
+const isEmpty = (str) => !str.trim().length;
+
 function getAllData() {
   allData = JSON.parse(localStorage.getItem("meetingLinks"));
 }
@@ -92,6 +94,17 @@ const getUpdate = function () {
 
   const btnUpdateData = document.getElementById("btn-updateData");
   btnUpdateData.addEventListener("click", function () {
+    if (
+      isEmpty(updateEvent.value) ||
+      isEmpty(updateLink.value) ||
+      isEmpty(updateDate.value) ||
+      isEmpty(updateStart.value) ||
+      isEmpty(updateEnd.value)
+    ) {
+      alert("Please fill all required field");
+      return;
+    }
+
     allData[objIndex].link = updateLink.value;
     allData[objIndex].event = updateEvent.value;
     allData[objIndex].start_time = updateStart.value;
@@ -112,7 +125,7 @@ function getDelete() {
 
 function reloadList() {
   getAllData();
-  console.log(allData);
+
   const listClass = document.getElementById("list-class");
   const noMeet = document.getElementById("noMeet");
   if (allData == null || allData.length < 1) {
@@ -216,7 +229,17 @@ btnNew.addEventListener("click", function () {
     const start_time = document.getElementById("start_time").value;
     const end_time = document.getElementById("end_time").value;
 
-    console.log("event: ", eventName);
+    if (
+      isEmpty(eventName) ||
+      isEmpty(link) ||
+      isEmpty(date) ||
+      isEmpty(start_time) ||
+      isEmpty(end_time)
+    ) {
+      alert("Please fill all required field");
+      return;
+    }
+
     const newData = {
       id: new Date().toISOString(),
       event: eventName,
