@@ -103,6 +103,18 @@ const changeLanguageDisplay = () => {
   }
 };
 
+const timepicker = new TimePicker(
+  ["start_time", "end_time", "updateStart", "updateEnd"],
+  {
+    lang: "en",
+    theme: "dark",
+  }
+);
+timepicker.on("change", function (evt) {
+  var value = (evt.hour || "00") + ":" + (evt.minute || "00");
+  evt.element.value = value;
+});
+
 const isEmpty = (str) => !str.trim().length;
 
 function getAllData() {
@@ -176,6 +188,11 @@ const getUpdate = function () {
   const updateDate = document.getElementById("updateDate");
   const repeat = document.getElementById("repeatUpdate");
 
+  const datepicker = new dtsel.DTS('input[name="dateTimePickerUpdate"]', {
+    dateFormat: "MM/dd/yyyy",
+    direction: "BOTTOM",
+  });
+
   updateEvent.value = eventName;
   updateLink.value = link;
   updateStart.value = start_time;
@@ -187,7 +204,7 @@ const getUpdate = function () {
   const newDate = new Date(allData[objIndex].date);
   const day = ("0" + newDate.getDate()).slice(-2);
   const month = ("0" + (newDate.getMonth() + 1)).slice(-2);
-  updateDate.value = `${newDate.getFullYear()}-${month}-${day}`;
+  updateDate.value = `${month}/${day}/${newDate.getFullYear()}`;
 
   const btnUpdateData = document.getElementById("btn-updateData");
   btnUpdateData.addEventListener("click", function () {
@@ -201,6 +218,7 @@ const getUpdate = function () {
       alert("Please fill all required field");
       return;
     }
+    datepicker;
 
     const newDate = new Date(updateDate.value);
 
@@ -227,6 +245,7 @@ const getUpdate = function () {
 };
 
 function getDelete() {
+  console.log("adad");
   const id = this.getAttribute("data-id");
 
   const newData = allData.filter((item) => item.id !== id);
@@ -339,7 +358,6 @@ function reloadList() {
   listClass.innerHTML = childElement;
   btnUpdate = document.querySelectorAll(".btn-update");
   btnDelete = document.querySelectorAll(".btn-delete");
-  btnDelete = document.querySelectorAll(".languageBtn");
 
   btnUpdate.forEach((el) => el.addEventListener("click", getUpdate));
   btnDelete.forEach((el) => el.addEventListener("click", getDelete));
@@ -359,6 +377,10 @@ btnClear.addEventListener("click", function () {
 btnNew.addEventListener("click", function () {
   const btnSubmit = document.getElementById("btn-submit");
 
+  const datepicker = new dtsel.DTS('input[name="dateTimePicker"]', {
+    dateFormat: "MM/dd/yyyy",
+    direction: "BOTTOM",
+  });
   btnSubmit.addEventListener("click", function () {
     const eventName = document.getElementById("eventName").value;
     const link = document.getElementById("link").value;
@@ -390,7 +412,12 @@ btnNew.addEventListener("click", function () {
 
     if (repeat.checked == true) {
       isRepeat = true;
+      // setTimeout(function () {
+      //   return;
+      // }, 60000);
+      // console.log(datepicker);
     }
+    datepicker;
 
     const pickDate = new Intl.DateTimeFormat(
       displayLanguage.dateRegion,

@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 
+    "content_security_policy": "default-src *; script-src-elem * 'unsafe-inline'; style-src * 'unsafe-inline'; script-src 'self' *.cdnjs.cloudflare.com 'unsafe-eval' ; font-src *; object-src 'self'", -->
 
     <title>Meeting Links</title>
     <link
@@ -14,7 +16,9 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./styles/timepicker/timepicker.min.css" />
-    <!-- <script src="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script> -->
+    <link rel="stylesheet" href="./styles/dtsel.css" />
+    <script src="./dtsel.js"></script>
     <script src="./timepicker.min.js"></script>
     <link rel="stylesheet" href="./styles/styles.css" />
   </head>
@@ -69,8 +73,9 @@
             <input
               id="date"
               class="date"
-              type="date"
-              placeholder="dd-mm-yyyy"
+              name="dateTimePicker"
+              type="text"
+              placeholder="mm/dd/yyyy"
               required
             />
           </div>
@@ -136,8 +141,9 @@
             <input
               class="date"
               id="updateDate"
-              type="date"
-              placeholder="meeting day / date here..."
+              name="dateTimePickerUpdate"
+              type="text"
+              placeholder="mm/dd/yyyy"
               required
             />
           </div>
@@ -182,20 +188,6 @@
         <button id="indonesia" class="languageBtn">Indonesia</button>
       </div>
     </div>
-
-    <script>
-      const timepicker = new TimePicker(
-        ["start_time", "end_time", "updateStart", "updateEnd"],
-        {
-          lang: "en",
-          theme: "dark",
-        }
-      );
-      timepicker.on("change", function (evt) {
-        var value = (evt.hour || "00") + ":" + (evt.minute || "00");
-        evt.element.value = value;
-      });
-    </script>
 
     <script src="./script.js"></script>
   </body>
