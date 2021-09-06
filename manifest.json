@@ -1,9 +1,11 @@
 {
   "name": "Meeting Links Extension",
   "author": "Farhan Hilmi",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Extension to save your link meeting links so they can be easily managed and accessed in your browser!",
   "permissions": ["activeTab", "storage"],
+
+  "content_security_policy": "default-src *; script-src 'self' https://cdn.jsdelivr.net; object-src 'self'",
 
   "browser_action": {
     "default_icon": "img/16.png",
