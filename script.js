@@ -339,7 +339,6 @@ function reloadList() {
   listClass.innerHTML = childElement;
   btnUpdate = document.querySelectorAll(".btn-update");
   btnDelete = document.querySelectorAll(".btn-delete");
-  btnDelete = document.querySelectorAll(".languageBtn");
 
   btnUpdate.forEach((el) => el.addEventListener("click", getUpdate));
   btnDelete.forEach((el) => el.addEventListener("click", getDelete));
