@@ -13,10 +13,13 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="./styles/timepicker/timepicker.min.css" />
+    <link
+      rel="stylesheet"
+      href="./assets/styles/timepicker/timepicker.min.css"
+    />
     <!-- <script src="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script> -->
-    <script src="./timepicker.min.js"></script>
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="./assets/js/timepicker.min.js"></script>
+    <link rel="stylesheet" href="./assets/styles/styles.css" />
   </head>
   <body>
     <main id="main-page">
@@ -183,20 +186,6 @@
       </div>
     </div>
 
-    <script>
-      const timepicker = new TimePicker(
-        ["start_time", "end_time", "updateStart", "updateEnd"],
-        {
-          lang: "en",
-          theme: "dark",
-        }
-      );
-      timepicker.on("change", function (evt) {
-        var value = (evt.hour || "00") + ":" + (evt.minute || "00");
-        evt.element.value = value;
-      });
-    </script>
-
-    <script src="./script.js"></script>
+    <script src="./assets//js/script.js"></script>
   </body>
 </html>

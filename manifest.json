@@ -8,15 +8,15 @@
   "content_security_policy": "default-src *; script-src-elem * 'unsafe-inline'; style-src * 'unsafe-inline'; script-src 'self' *.cdnjs.cloudflare.com 'unsafe-eval' ; font-src *; object-src 'self'",
 
   "browser_action": {
-    "default_icon": "img/16.png",
+    "default_icon": "assets/img/16.png",
     "default_title": "Meeting Link",
     "default_popup": "popup.html"
   },
 
   "icons": {
-    "16": "img/16.png",
-    "48": "img/48.png",
-    "128": "img/128.png"
+    "16": "assets/img/16.png",
+    "48": "assets/img/48.png",
+    "128": "assets/img/128.png"
   },
   "manifest_version": 2
 }

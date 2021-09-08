@@ -103,6 +103,18 @@ const changeLanguageDisplay = () => {
   }
 };
 
+const timepicker = new TimePicker(
+  ["start_time", "end_time", "updateStart", "updateEnd"],
+  {
+    lang: "en",
+    theme: "dark",
+  }
+);
+timepicker.on("change", function (evt) {
+  var value = (evt.hour || "00") + ":" + (evt.minute || "00");
+  evt.element.value = value;
+});
+
 const isEmpty = (str) => !str.trim().length;
 
 function getAllData() {
